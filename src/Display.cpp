@@ -6,7 +6,12 @@ U8G2_SH1106_128X64_NONAME_F_HW_I2C u8g2(
 
 void setupDisplay()
 {
-    u8g2.begin();
+    u8g2.begin(); 
+    u8g2.clearBuffer();
+    u8g2.setFont(u8g2_font_helvB08_tr);
+    drawWrappedCenteredText("Booted", 128, 12, 64); // screen width, line height, screen height
+    u8g2.sendBuffer();
+    delay(10000);
 }
 
 int currentAnswerIndex = -1;

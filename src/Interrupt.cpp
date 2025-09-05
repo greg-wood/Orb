@@ -1,7 +1,7 @@
 #include "Interrupt.hpp"
 
 // Example implementation (place in .cpp file):
-volatile bool buttonPressed = false;
+volatile bool buttonPressed = true;
 
 void IRAM_ATTR handleButtonInterrupt()
 {
@@ -10,6 +10,6 @@ void IRAM_ATTR handleButtonInterrupt()
 
 void setupButtonInterrupt(uint8_t pin)
 {
-    pinMode(pin, INPUT_PULLUP);
-    attachInterrupt(digitalPinToInterrupt(pin), handleButtonInterrupt, FALLING);
+    pinMode(pin, INPUT_PULLDOWN);
+    attachInterrupt(digitalPinToInterrupt(pin), handleButtonInterrupt, RISING);
 };

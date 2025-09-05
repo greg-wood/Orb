@@ -28,6 +28,5 @@ void loop()
     buttonPressed = false;
     show8BallResponse();
   }
-  delay(500);
   Serial.println("In Loop");
 }
