@@ -1,27 +1,20 @@
 #include "Sleep.hpp"
 
-void goToSleep()
+unsigned long lastActivityTime = 0;
+const unsigned long inactivityTimeout = 300000; // 60 seconds
+
+void updateActivity()
 {
-    Serial.println("Going to sleep...");
-
-    u8g2.clearDisplay();
-    u8g2.sleepOn();
-    delay(100);
-    pinMode(TAP_GPIO, INPUT_PULLUP); // HIGH by default
-    gpio_pullup_en((gpio_num_t)TAP_GPIO);
-    gpio_hold_en((gpio_num_t)TAP_GPIO);   // Keep pull state during sleep
-    gpio_pullup_en((gpio_num_t)TAP_GPIO); // Ensure the pin stays HIGH when idle
-
-    esp_deep_sleep_enable_gpio_wakeup(TAP_PIN_MASK, ESP_GPIO_WAKEUP_GPIO_LOW);
-    esp_deep_sleep_start();
+    lastActivityTime = millis();
 }
 
-boolean isWokenByTap()
+void checkSleep()
 {
-    if (esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_GPIO)
+    if (millis() - lastActivityTime > inactivityTimeout)
     {
-        Serial.println("Woken by tap!");
-        return true;
+        Serial.println("No activity detected. Going to sleep...");
+        // esp_sleep_enable_timer_wakeup(10 * 1000000); // Wake up after 10 seconds
+        Serial.flush();
+        esp_deep_sleep_start();
     }
-    return false;
 }

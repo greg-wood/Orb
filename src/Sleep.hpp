@@ -9,3 +9,5 @@
 
 boolean isWokenByTap();
 void goToSleep();
+void checkSleep();
+void updateActivity();

@@ -5,6 +5,9 @@
 #include "Interrupt.hpp"
 #include "Sleep.hpp"
 
+// updateActivity(); // Call this whenever activity occurs
+// checkSleep();     // Call
+
 void setup()
 {
   Serial.begin(115200);
