@@ -5,8 +5,6 @@
 #include "Interrupt.hpp"
 #include "Sleep.hpp"
 
-// updateActivity(); // Call this whenever activity occurs
-// checkSleep();     // Call
 
 void setup()
 {
@@ -14,22 +12,33 @@ void setup()
   delay(500);
   Serial.println("Booting...");
   connectToWiFi();
-  initmDNS();
+//  initmDNS();
   setupOTA();
   setupDisplay();
   setupButtonInterrupt(TAP_GPIO);
+      updateActivity(); // Call this whenever activity occurs
+
 }
+  int Mins = 0;
 
 void loop()
 {
-
+  currentTime = millis();
   ArduinoOTA.handle();
 
   if (buttonPressed)
   {
-    Serial.println("Button pressed!");
+    Serial.println("Shocked!");
     buttonPressed = false;
+    updateActivity(); // Call this whenever activity occurs
     show8BallResponse();
   }
-  Serial.println("In Loop");
+  if (currentTime % 60000 == 0 ) {
+  Serial.print("In Loop ");
+  Serial.print(currentTime);
+  Serial.print(" ");
+  Serial.println(++Mins);
+  Serial.flush();
+  }
+  checkSleep(); 
 }

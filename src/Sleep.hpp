@@ -7,6 +7,8 @@
 #define TAP_GPIO 3 // GPIO connected to tap module
 #define TAP_PIN_MASK (1ULL << TAP_GPIO)
 
+extern unsigned long currentTime;
+
 boolean isWokenByTap();
 void goToSleep();
 void checkSleep();

@@ -43,6 +43,7 @@ void connectToWiFi()
 {
     Serial.println("Connecting to WiFi...");
     WiFi.mode(WIFI_STA);
+    WiFi.setHostname("Orb"); // Set the hostname before connecting
     WiFi.begin(ssid, password);
 
     int maxAttempts = 20;
@@ -71,12 +72,11 @@ void connectToWiFi()
     }
 }
 
-#include <ESPmDNS.h>
 
 // Initializes mDNS with hostname "Orb.local"
-void initmDNS()
+/*void initmDNS()
 {
-    if (!MDNS.begin("Orb"))
+    if (!MDNS.begin("greg"))
     { // Hostname will be "Orb.local"
         Serial.println("Error setting up mDNS responder!");
         while (1)
@@ -89,8 +89,8 @@ void initmDNS()
         Serial.println("mDNS responder started: Orb.local");
     }
 }
+    */
 
-#include <ArduinoOTA.h>
 
 // Initializes OTA update functionality
 void setupOTA()
@@ -107,6 +107,7 @@ void setupOTA()
         else if (error == OTA_CONNECT_ERROR) Serial.println("Connect Failed");
         else if (error == OTA_RECEIVE_ERROR) Serial.println("Receive Failed");
         else if (error == OTA_END_ERROR) Serial.println("End Failed"); });
-    ArduinoOTA.begin();
+        ArduinoOTA.setHostname("Orb"); // Set OTA hostname
+    ArduinoOTA.begin(); // false to disable MDNS
     Serial.println("OTA Ready");
 }

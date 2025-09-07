@@ -11,7 +11,7 @@ void setupDisplay()
     u8g2.setFont(u8g2_font_helvB08_tr);
     drawWrappedCenteredText("Booted", 128, 12, 64); // screen width, line height, screen height
     u8g2.sendBuffer();
-    delay(10000);
+    delay(500);
 }
 
 int currentAnswerIndex = -1;
@@ -74,4 +74,10 @@ void show8BallResponse()
     u8g2.sendBuffer();
 
     Serial.println("Displayed: " + String(message));
+}
+
+void clearDisplay() {
+    u8g2.clearDisplay();
+//    u8g2.clearBuffer();
+//    u8g2.sendBuffer();
 }
