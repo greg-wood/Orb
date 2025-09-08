@@ -1,7 +1,7 @@
 #pragma once
 #include <Arduino.h>
 
-extern volatile bool buttonPressed;
+extern volatile bool shocked;
 
 // Example ISR for a button press
 void IRAM_ATTR handleButtonInterrupt();

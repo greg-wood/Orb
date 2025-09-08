@@ -16,7 +16,7 @@ void setup()
   setupOTA();
   setupDisplay();
   setupButtonInterrupt(TAP_GPIO);
-      updateActivity(); // Call this whenever activity occurs
+  updateActivity(); // Call this whenever activity occurs
 
 }
   int Mins = 0;
@@ -26,14 +26,14 @@ void loop()
   currentTime = millis();
   ArduinoOTA.handle();
 
-  if (buttonPressed)
+  if (shocked)
   {
     Serial.println("Shocked!");
-    buttonPressed = false;
+    shocked = false;
     updateActivity(); // Call this whenever activity occurs
     show8BallResponse();
   }
-  if (currentTime % 60000 == 0 ) {
+  if ((currentTime % 60000) == 0 ) {
   Serial.print("In Loop ");
   Serial.print(currentTime);
   Serial.print(" ");

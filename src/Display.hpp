@@ -12,3 +12,5 @@ void setupDisplay();
 void show8BallResponse();
 void drawWrappedCenteredText(const char *text, int maxWidth, int lineHeight, int screenHeight);
 void clearDisplay();
+void flushDisplay();
+ 

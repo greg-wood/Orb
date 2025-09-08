@@ -81,3 +81,8 @@ void clearDisplay() {
 //    u8g2.clearBuffer();
 //    u8g2.sendBuffer();
 }
+
+void flushDisplay(){
+    u8g2.sendBuffer();
+    u8g2.flush();
+}
